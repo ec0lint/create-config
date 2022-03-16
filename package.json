@@ -1,7 +1,9 @@
 {
-    "name": "@eslint/create-config",
-    "version": "0.1.2",
-    "description": "Utility to create ESLint config files.",
+    "name": "@ec0lint/create-config",
+    "version": "0.0.1",
+    "author": "Malwina Kubas <malwina.kubas@gmail.com>",
+
+    "description": "Utility to create ec0lint config files.",
     "keywords": [
         "ast",
         "lint",
@@ -9,12 +11,12 @@
         "ecmascript",
         "espree"
     ],
-    "homepage": "https://eslint.org",
-    "bugs": "https://github.com/eslint/create-config/issues/",
-    "repository": "eslint/create-config",
-    "funding": "https://opencollective.com/eslint",
+    "homepage": "TBD",
+    "bugs": "https://github.com/ec0lint/create-config/issues/",
+    "repository": "ec0lint/create-config",
+    "funding": "TBD",
     "license": "MIT",
-    "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
+    "author": "Malwina Kubas <malwina.kubas@gmail.com>",
     "type": "module",
     "bin": {
         "create-config": "./bin/create-config.js"

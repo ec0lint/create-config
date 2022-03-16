@@ -293,63 +293,6 @@ describe("configInitializer", () => {
                 );
             });
 
-            describe('hasESLintVersionConflict (Note: peerDependencies always `eslint: "^3.19.0"` by stubs)', () => {
-
-                before(() => {
-
-                    // FIX: not sure why it was changed somewhere???
-                    process.chdir(fixtureDir);
-                });
-
-                describe("if local ESLint is not found,", () => {
-                    before(() => {
-                        setLocalInstalledEslint(null);
-                    });
-
-                    it("should return false.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, false);
-                    });
-                });
-
-                describe("if local ESLint is 3.19.0,", () => {
-                    before(() => {
-                        setLocalInstalledEslint("3.19.0");
-                    });
-
-                    it("should return false.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, false);
-                    });
-                });
-
-                describe("if local ESLint is 4.0.0,", () => {
-                    before(() => {
-                        setLocalInstalledEslint("4.0.0");
-                    });
-
-                    it("should return true.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, true);
-                    });
-                });
-
-                describe("if local ESLint is 3.18.0,", () => {
-                    before(() => {
-                        setLocalInstalledEslint("3.18.0");
-                    });
-
-                    it("should return true.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, true);
-                    });
-                });
-            });
-
             it("should support the standard style guide with Vue.js", () => {
                 const config = {
                     plugins: ["vue"],
