@@ -1,5 +1,5 @@
-# @eslint/create-config
-Utility to create ESLint config files
+# @ec0lint/create-config
+Utility to create ec0lint config files
 
 ## <a name="usage"></a>Usage
 
@@ -9,10 +9,10 @@ You can use npm/npx(shipped with Node.js).
 
 ```bash
 # use npm
-npm init @eslint/config
+npm init @ec0lint/config
 ```
 
 ```bash
 # use npx
-npx @eslint/create-config
+npx @ec0lint/create-config
 ```

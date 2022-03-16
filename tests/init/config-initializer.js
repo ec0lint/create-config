@@ -25,25 +25,25 @@ const { assert } = chai;
 //------------------------------------------------------------------------------
 
 let fixtureDir;
-let localInstalledEslintDir;
+let localInstalledEc0lintDir;
 
 /**
  * change local installed eslint version in fixtures
  * @param {string|null} version installed eslint version, null => not installed
  * @returns {void}
  */
-function setLocalInstalledEslint(version) {
-    const eslintPkgPath = path.join(localInstalledEslintDir, "./package.json");
-    let pkg = JSON.parse(fs.readFileSync(eslintPkgPath, "utf8"));
-
-    if (version) {
-        pkg.version = version;
-    } else {
-        pkg = {};
-    }
-
-    fs.writeFileSync(eslintPkgPath, JSON.stringify(pkg, null, 2), "utf8");
-}
+// function setLocalInstalledEslint(version) {
+//     const eslintPkgPath = path.join(localInstalledEslintDir, "./package.json");
+//     let pkg = JSON.parse(fs.readFileSync(eslintPkgPath, "utf8"));
+//
+//     if (version) {
+//         pkg.version = version;
+//     } else {
+//         pkg = {};
+//     }
+//
+//     fs.writeFileSync(eslintPkgPath, JSON.stringify(pkg, null, 2), "utf8");
+// }
 
 
 //------------------------------------------------------------------------------
@@ -63,15 +63,14 @@ describe("configInitializer", () => {
     let log;
 
 
-    // copy into clean area so as not to get "infected" by this project's .eslintrc files
     before(() => {
-        const __filename = fileURLToPath(import.meta.url); // eslint-disable-line no-underscore-dangle
+        const filename = fileURLToPath(import.meta.url);
 
-        fixtureDir = path.join(__filename, "../../../tmp/eslint/fixtures/config-initializer");
-        localInstalledEslintDir = path.join(fixtureDir, "./node_modules/eslint");
-        sh.mkdir("-p", localInstalledEslintDir);
+        fixtureDir = path.join(filename, "../../../tmp/ec0lint/fixtures/config-initializer");
+        localInstalledEc0lintDir = path.join(fixtureDir, "./node_modules/ec0lint");
+        sh.mkdir("-p", localInstalledEc0lintDir);
         sh.cp("-r", "./tests/fixtures/config-initializer/.", fixtureDir);
-        sh.cp("-r", "./tests/fixtures/eslint/.", localInstalledEslintDir);
+        sh.cp("-r", "./tests/fixtures/ec0lint/.", localInstalledEc0lintDir);
         fixtureDir = fs.realpathSync(fixtureDir);
     });
 
@@ -86,12 +85,6 @@ describe("configInitializer", () => {
             status[pkg] = false;
             return status;
         }, {}));
-        npmFetchPeerDependenciesStub = sinon.fake(() => ({
-            eslint: "^3.19.0",
-            "eslint-plugin-jsx-a11y": "^5.0.1",
-            "eslint-plugin-import": "^2.2.0",
-            "eslint-plugin-react": "^7.0.1"
-        }));
 
         const requireStubs = {
             "../../lib/shared/logging.js": log,
@@ -141,65 +134,26 @@ describe("configInitializer", () => {
             it("should create default config", () => {
                 const config = init.processAnswers(answers);
 
-                assert.deepStrictEqual(config.rules.indent, ["error", 2]);
-                assert.deepStrictEqual(config.rules.quotes, ["error", "single"]);
-                assert.deepStrictEqual(config.rules["linebreak-style"], ["error", "unix"]);
-                assert.deepStrictEqual(config.rules.semi, ["error", "always"]);
-                assert.strictEqual(config.env.es2021, true);
-                assert.strictEqual(config.parserOptions.ecmaVersion, "latest");
-                assert.strictEqual(config.parserOptions.sourceType, "module");
+                // assert.strictEqual(config.env.es2021, true);
+                // assert.strictEqual(config.parserOptions.ecmaVersion, "latest");
+                // assert.strictEqual(config.parserOptions.sourceType, "module");
                 assert.strictEqual(config.env.browser, true);
-                assert.strictEqual(config.extends, "eslint:recommended");
+                assert.strictEqual(config.extends, "ec0lint:recommended");
             });
 
-            it("should disable semi", () => {
-                answers.semi = false;
+            // it("should enable typescript parser and plugin", () => {
+            //     answers.typescript = true;
+            //     const config = init.processAnswers(answers);
+            //
+            //     assert.strictEqual(config.parser, "@typescript-eslint/parser");
+            //     assert.deepStrictEqual(config.plugins, ["@typescript-eslint"]);
+            //     assert.deepStrictEqual(config.extends, ["eslint:recommended", "plugin:@typescript-eslint/recommended"]);
+            // });
+
+            it("should extend ec0lint:recommended", () => {
                 const config = init.processAnswers(answers);
 
-                assert.deepStrictEqual(config.rules.semi, ["error", "never"]);
-            });
-
-            it("should enable react plugin", () => {
-                answers.framework = "react";
-                const config = init.processAnswers(answers);
-
-                assert.strictEqual(config.parserOptions.ecmaFeatures.jsx, true);
-                assert.strictEqual(config.parserOptions.ecmaVersion, "latest");
-                assert.deepStrictEqual(config.plugins, ["react"]);
-            });
-
-            it("should enable vue plugin", () => {
-                answers.framework = "vue";
-                const config = init.processAnswers(answers);
-
-                assert.strictEqual(config.parserOptions.ecmaVersion, "latest");
-                assert.deepStrictEqual(config.plugins, ["vue"]);
-                assert.deepStrictEqual(config.extends, ["eslint:recommended", "plugin:vue/essential"]);
-            });
-
-            it("should enable typescript parser and plugin", () => {
-                answers.typescript = true;
-                const config = init.processAnswers(answers);
-
-                assert.strictEqual(config.parser, "@typescript-eslint/parser");
-                assert.deepStrictEqual(config.plugins, ["@typescript-eslint"]);
-                assert.deepStrictEqual(config.extends, ["eslint:recommended", "plugin:@typescript-eslint/recommended"]);
-            });
-
-            it("should enable typescript parser and plugin with vue", () => {
-                answers.framework = "vue";
-                answers.typescript = true;
-                const config = init.processAnswers(answers);
-
-                assert.deepStrictEqual(config.extends, ["eslint:recommended", "plugin:vue/essential", "plugin:@typescript-eslint/recommended"]);
-                assert.strictEqual(config.parserOptions.parser, "@typescript-eslint/parser");
-                assert.deepStrictEqual(config.plugins, ["vue", "@typescript-eslint"]);
-            });
-
-            it("should extend eslint:recommended", () => {
-                const config = init.processAnswers(answers);
-
-                assert.strictEqual(config.extends, "eslint:recommended");
+                assert.strictEqual(config.extends, "ec0lint:recommended");
             });
 
             it("should not use commonjs by default", () => {
@@ -215,188 +169,15 @@ describe("configInitializer", () => {
                 assert.isTrue(config.env.commonjs);
             });
         });
-
-        describe("guide", () => {
-            it("should support the google style guide", () => {
-                const config = { extends: "google" };
-                const modules = init.getModulesList(config);
-
-                assert.deepStrictEqual(config, { extends: "google", installedESLint: true });
-                assert.include(modules, "eslint-config-google@latest");
-            });
-
-            it("should support the airbnb style guide", () => {
-                const config = { extends: "airbnb" };
-                const modules = init.getModulesList(config);
-
-                assert.deepStrictEqual(config, { extends: "airbnb", installedESLint: true });
-                assert.include(modules, "eslint-config-airbnb@latest");
-            });
-
-            it("should support the airbnb base style guide", () => {
-                const config = { extends: "airbnb-base" };
-                const modules = init.getModulesList(config);
-
-                assert.deepStrictEqual(config, { extends: "airbnb-base", installedESLint: true });
-                assert.include(modules, "eslint-config-airbnb-base@latest");
-            });
-
-            it("should support the standard style guide", () => {
-                const config = { extends: "standard" };
-                const modules = init.getModulesList(config);
-
-                assert.deepStrictEqual(config, { extends: "standard", installedESLint: true });
-                assert.include(modules, "eslint-config-standard@latest");
-            });
-
-            it("should support the xo style guide", () => {
-                const config = { extends: "xo" };
-                const modules = init.getModulesList(config);
-
-                assert.deepStrictEqual(config, { extends: "xo", installedESLint: true });
-                assert.include(modules, "eslint-config-xo@latest");
-            });
-
-            it("should install required sharable config", () => {
-                const config = { extends: "google" };
-
-                init.installModules(init.getModulesList(config));
-                assert(npmInstallStub.calledOnce);
-                assert(npmInstallStub.firstCall.args[0].some(name => name.startsWith("eslint-config-google@")));
-            });
-
-            it("should install ESLint if not installed locally", () => {
-                const config = { extends: "google" };
-
-                init.installModules(init.getModulesList(config));
-                assert(npmInstallStub.calledOnce);
-                assert(npmInstallStub.firstCall.args[0].some(name => name.startsWith("eslint@")));
-            });
-
-            it("should install peerDependencies of the sharable config", () => {
-                const config = { extends: "airbnb" };
-
-                init.installModules(init.getModulesList(config));
-
-                assert(npmFetchPeerDependenciesStub.calledOnce);
-                assert(npmFetchPeerDependenciesStub.firstCall.args[0] === "eslint-config-airbnb@latest");
-                assert(npmInstallStub.calledOnce);
-                assert.deepStrictEqual(
-                    npmInstallStub.firstCall.args[0],
-                    [
-                        "eslint-config-airbnb@latest",
-                        "eslint@^3.19.0",
-                        "eslint-plugin-jsx-a11y@^5.0.1",
-                        "eslint-plugin-import@^2.2.0",
-                        "eslint-plugin-react@^7.0.1"
-                    ]
-                );
-            });
-
-            describe('hasESLintVersionConflict (Note: peerDependencies always `eslint: "^3.19.0"` by stubs)', () => {
-
-                before(() => {
-
-                    // FIX: not sure why it was changed somewhere???
-                    process.chdir(fixtureDir);
-                });
-
-                describe("if local ESLint is not found,", () => {
-                    before(() => {
-                        setLocalInstalledEslint(null);
-                    });
-
-                    it("should return false.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, false);
-                    });
-                });
-
-                describe("if local ESLint is 3.19.0,", () => {
-                    before(() => {
-                        setLocalInstalledEslint("3.19.0");
-                    });
-
-                    it("should return false.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, false);
-                    });
-                });
-
-                describe("if local ESLint is 4.0.0,", () => {
-                    before(() => {
-                        setLocalInstalledEslint("4.0.0");
-                    });
-
-                    it("should return true.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, true);
-                    });
-                });
-
-                describe("if local ESLint is 3.18.0,", () => {
-                    before(() => {
-                        setLocalInstalledEslint("3.18.0");
-                    });
-
-                    it("should return true.", () => {
-                        const result = init.hasESLintVersionConflict({ styleguide: "airbnb" });
-
-                        assert.strictEqual(result, true);
-                    });
-                });
-            });
-
-            it("should support the standard style guide with Vue.js", () => {
-                const config = {
-                    plugins: ["vue"],
-                    extends: ["plugin:vue/essential", "standard"]
-                };
-                const modules = init.getModulesList(config);
-
-                assert.include(modules, "eslint-plugin-vue@latest");
-                assert.include(modules, "eslint-config-standard@latest");
-            });
-
-            it("should support custom parser", () => {
-                const config = {
-                    parser: "@typescript-eslint/parser"
-                };
-                const modules = init.getModulesList(config);
-
-                assert.include(modules, "@typescript-eslint/parser@latest");
-            });
-
-            it("should support custom parser with Vue.js", () => {
-                const config = {
-
-                    // We should declare the parser at `parserOptions` when using with `eslint-plugin-vue`.
-                    parserOptions: {
-                        parser: "@typescript-eslint/parser"
-                    }
-                };
-                const modules = init.getModulesList(config);
-
-                assert.include(modules, "@typescript-eslint/parser@latest");
-            });
-        });
-
     });
 
     describe("writeFile()", () => {
 
         beforeEach(() => {
             answers = {
-                purpose: "style",
+                purpose: "all",
                 source: "prompt",
                 extendDefault: true,
-                indent: 2,
-                quotes: "single",
-                linebreak: "unix",
-                semi: true,
                 moduleType: "esm",
                 es6Globals: true,
                 env: ["browser"],
@@ -417,9 +198,9 @@ describe("configInitializer", () => {
             process.chdir(originalDir);
         });
 
-        it("should create .eslintrc.json", () => {
+        it("should create .ec0lintrc.json", () => {
             const config = init.processAnswers(answers);
-            const filePath = path.resolve(fixtureDir, ".eslintrc.json");
+            const filePath = path.resolve(fixtureDir, ".ec0lintrc.json");
 
             fs.writeFileSync(pkgJSONPath, JSON.stringify(pkgJSONContents));
 
@@ -431,11 +212,11 @@ describe("configInitializer", () => {
             fs.unlinkSync(pkgJSONPath);
         });
 
-        it("should create .eslintrc.js", async () => {
+        it("should create .ec0lintrc.js", async () => {
             answers.format = "JavaScript";
 
             const config = init.processAnswers(answers);
-            const filePath = path.resolve(fixtureDir, ".eslintrc.js");
+            const filePath = path.resolve(fixtureDir, ".ec0lintrc.js");
 
             fs.writeFileSync(pkgJSONPath, JSON.stringify(pkgJSONContents));
 
@@ -447,11 +228,11 @@ describe("configInitializer", () => {
             fs.unlinkSync(pkgJSONPath);
         });
 
-        it("should create .eslintrc.yml", async () => {
+        it("should create .ec0lintrc.yml", async () => {
             answers.format = "YAML";
 
             const config = init.processAnswers(answers);
-            const filePath = path.resolve(fixtureDir, ".eslintrc.yml");
+            const filePath = path.resolve(fixtureDir, ".ec0lintrc.yml");
 
             fs.writeFileSync(pkgJSONPath, JSON.stringify(pkgJSONContents));
 
@@ -463,8 +244,7 @@ describe("configInitializer", () => {
             fs.unlinkSync(pkgJSONPath);
         });
 
-        // For https://github.com/eslint/eslint/issues/14137
-        it("should create .eslintrc.cjs", async () => {
+        it("should create .ec0lintrc.cjs", async () => {
             answers.format = "JavaScript";
 
             // create package.json with "type": "module"
@@ -473,7 +253,7 @@ describe("configInitializer", () => {
             fs.writeFileSync(pkgJSONPath, JSON.stringify(pkgJSONContents));
 
             const config = init.processAnswers(answers);
-            const filePath = path.resolve(fixtureDir, ".eslintrc.cjs");
+            const filePath = path.resolve(fixtureDir, ".ec0lintrc.cjs");
 
             await init.writeFile(config, answers.format);
 
@@ -483,7 +263,7 @@ describe("configInitializer", () => {
             fs.unlinkSync(pkgJSONPath);
         });
 
-        it("should create .eslintrc.json even with type: 'module'", async () => {
+        it("should create .ec0lintrc.json even with type: 'module'", async () => {
             answers.format = "JSON";
 
             // create package.json with "type": "module"
@@ -492,7 +272,7 @@ describe("configInitializer", () => {
             fs.writeFileSync(pkgJSONPath, JSON.stringify(pkgJSONContents));
 
             const config = init.processAnswers(answers);
-            const filePath = path.resolve(fixtureDir, ".eslintrc.json");
+            const filePath = path.resolve(fixtureDir, ".ec0lintrc.json");
 
             await init.writeFile(config, answers.format);
 

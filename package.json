@@ -1,7 +1,8 @@
 {
-    "name": "@eslint/create-config",
-    "version": "0.1.2",
-    "description": "Utility to create ESLint config files.",
+    "name": "@ec0lint/create-config",
+    "version": "0.0.2",
+    "author": "Malwina Kubas <malwina.kubas@gmail.com>",
+    "description": "Utility to create ec0lint config files.",
     "keywords": [
         "ast",
         "lint",
@@ -9,12 +10,11 @@
         "ecmascript",
         "espree"
     ],
-    "homepage": "https://eslint.org",
-    "bugs": "https://github.com/eslint/create-config/issues/",
-    "repository": "eslint/create-config",
-    "funding": "https://opencollective.com/eslint",
+    "homepage": "TBD",
+    "bugs": "https://github.com/ec0lint/create-config/issues/",
+    "repository": "ec0lint/create-config",
+    "funding": "TBD",
     "license": "MIT",
-    "author": "Nicholas C. Zakas <nicholas+npm@nczconsulting.com>",
     "type": "module",
     "bin": {
         "create-config": "./bin/create-config.js"
@@ -54,10 +54,16 @@
     "devDependencies": {
         "c8": "^7.10.0",
         "chai": "^4.3.4",
-        "eslint": "^8.2.0",
+        "eslint": "^8.11.0",
+        "eslint-config-airbnb": "^19.0.4",
         "eslint-config-eslint": "^7.0.0",
+        "eslint-config-google": "^0.14.0",
+        "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-jsdoc": "^37.0.3",
+        "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-react": "^7.29.4",
+        "eslint-plugin-react-hooks": "^4.3.0",
         "eslint-release": "^3.2.0",
         "esmock": "^1.7.0",
         "espree": "^9.0.0",
