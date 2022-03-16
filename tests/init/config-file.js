@@ -131,14 +131,14 @@ describe("ConfigFile", () => {
             StubbedConfigFile.write(singleQuoteConfig, "test-config.js");
             nodeAssert(syncStub.called);
             nodeAssert(syncStub.calledWith(
-                sinon.match("eslint"),
+                sinon.match("ec0lint"),
                 sinon.match.array.contains(["--fix"])
             ));
         });
 
         it("should throw error if file extension is not valid", () => {
             nodeAssert.rejects(async () => {
-                await ConfigFile.write({}, getFixturePath("yaml/.eslintrc.class"));
+                await ConfigFile.write({}, getFixturePath("yaml/.ec0lintrc.class"));
             }, /write to unknown file type/u);
         });
     });
