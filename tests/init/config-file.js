@@ -45,10 +45,6 @@ describe("ConfigFile", () => {
                 env: {
                     browser: true,
                     node: true
-                },
-                rules: {
-                    quotes: 2,
-                    semi: 1
                 }
             };
         });
