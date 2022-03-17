@@ -1,7 +1,7 @@
 {
     "name": "@ec0lint/create-config",
-    "version": "0.0.2",
-    "author": "Malwina Kubas <malwina.kubas@gmail.com>",
+    "version": "0.0.4",
+    "author": "Malwina Kubas @malwinq",
     "description": "Utility to create ec0lint config files.",
     "keywords": [
         "ast",
@@ -55,9 +55,7 @@
         "c8": "^7.10.0",
         "chai": "^4.3.4",
         "eslint": "^8.11.0",
-        "eslint-config-airbnb": "^19.0.4",
-        "eslint-config-eslint": "^7.0.0",
-        "eslint-config-google": "^0.14.0",
+        "ec0lint-config-ec0lint": "^7.0.0",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-jsdoc": "^37.0.3",
         "eslint-plugin-jsx-a11y": "^6.5.1",
