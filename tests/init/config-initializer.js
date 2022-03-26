@@ -147,7 +147,7 @@ describe("configInitializer", () => {
                 assert.strictEqual(config.extends, "ec0lint:recommended");
             });
 
-            it("should not browser by default", () => {
+            it("should not use browser by default", () => {
                 const config = init.processAnswers(answers);
 
                 assert.isUndefined(config.env.browser);

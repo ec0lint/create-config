@@ -19,3 +19,6 @@ node_modules/
 .vscode
 /tmp
 foo.js
+foo.yaml
+foo.yml
+bar.json
