@@ -3,7 +3,7 @@
 module.exports = {
     root: true,
     extends: [
-        "eslint"
+        "ec0lint"
     ],
     parserOptions: {
         ecmaVersion: "latest"
