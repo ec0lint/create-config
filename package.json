@@ -1,6 +1,6 @@
 {
     "name": "@ec0lint/create-config",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "author": "Malwina Kubas @malwinq",
     "description": "Utility to create ec0lint config files.",
     "keywords": [
@@ -29,7 +29,7 @@
         "access": "public"
     },
     "scripts": {
-        "lint": "eslint .",
+        "lint": "ec0lint .",
         "test": "mocha \"tests/init/**/*.js\"",
         "test:cov": "c8 npm test",
         "generate-alpharelease": "eslint-generate-prerelease alpha",
@@ -44,6 +44,7 @@
     },
     "dependencies": {
         "@eslint/eslintrc": "^1.0.3",
+        "@ec0lint/ec0lintrc": "^0.0.4",
         "cross-spawn": "^7.0.2",
         "debug": "^4.0.1",
         "enquirer": "^2.3.5",
@@ -54,8 +55,8 @@
     "devDependencies": {
         "c8": "^7.10.0",
         "chai": "^4.3.4",
-        "ec0lint": "^0.0.13",
-        "ec0lint-config-ec0lint": "^0.0.1",
+        "ec0lint": "^0.0.21",
+        "ec0lint-config-ec0lint": "^0.0.4",
         "eslint": "^8.11.0",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-jsdoc": "^37.0.3",
@@ -78,6 +79,9 @@
         "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
     },
     "lint-staged": {
-        "*.js": "eslint --fix"
+        "*.js": "ec0lint"
+    },
+    "gitHooks": {
+        "pre-commit": "lint-staged"
     }
 }

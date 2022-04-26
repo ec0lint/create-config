@@ -5,7 +5,8 @@ module.exports = {
     },
     "extends": "ec0lint:recommended",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "rules": {
     }
