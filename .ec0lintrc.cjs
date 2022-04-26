@@ -1,13 +1,24 @@
+"use strict";
+
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+    root: true,
+    extends: [
+        "eslint"
+    ],
+    parserOptions: {
+        ecmaVersion: "latest"
     },
-    "extends": "ec0lint:recommended",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "rules": {
-    }
-}
+    overrides: [
+        {
+            files: [
+                "tests/**/*.js"
+            ],
+            env: {
+                mocha: true
+            }
+        }
+    ],
+    ignorePatterns: [
+        "fixtures/"
+    ]
+};
