@@ -44,7 +44,7 @@
     },
     "dependencies": {
         "@eslint/eslintrc": "^1.0.3",
-        "@ec0lint/ec0lintrc": "^0.0.4",
+        "@ec0lint/ec0lintrc": "^0.0.5",
         "cross-spawn": "^7.0.2",
         "debug": "^4.0.1",
         "enquirer": "^2.3.5",
