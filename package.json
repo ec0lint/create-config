@@ -43,7 +43,7 @@
         "ui": "bdd"
     },
     "dependencies": {
-        "@ec0lint/ec0lintrc": "^0.0.6",
+        "@ec0lint/ec0lintrc": "^0.0.7",
         "cross-spawn": "^7.0.2",
         "debug": "^4.0.1",
         "enquirer": "^2.3.5",
