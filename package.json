@@ -1,6 +1,6 @@
 {
     "name": "@ec0lint/create-config",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "author": "Malwina Kubas @malwinq",
     "description": "Utility to create ec0lint config files.",
     "keywords": [
@@ -38,7 +38,7 @@
         "ui": "bdd"
     },
     "dependencies": {
-        "@ec0lint/ec0lintrc": "^0.0.7",
+        "@ec0lint/ec0lintrc": "^0.0.13",
         "cross-spawn": "^7.0.2",
         "debug": "^4.0.1",
         "enquirer": "^2.3.5",
