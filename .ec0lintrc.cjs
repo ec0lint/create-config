@@ -5,8 +5,12 @@ module.exports = {
     extends: [
         "ec0lint"
     ],
+    env: {
+        es6: true,
+        node: true
+    },
     parserOptions: {
-        ecmaVersion: "latest",
+        ecmaVersion: 2020,
         sourceType: "module"
     },
     overrides: [
