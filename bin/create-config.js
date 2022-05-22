@@ -5,6 +5,6 @@
  * @author Nicholas C. Zakas
  */
 
-/* eslint no-console:off -- CLI */
+/* ec0lint no-console:off -- CLI */
 import { initializeConfig } from "../lib/init/config-initializer.js";
 initializeConfig();
