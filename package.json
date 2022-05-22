@@ -1,6 +1,6 @@
 {
     "name": "@ec0lint/create-config",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "author": "Malwina Kubas @malwinq",
     "description": "Utility to create ec0lint config files.",
     "keywords": [
@@ -49,7 +49,7 @@
     "devDependencies": {
         "c8": "^7.10.0",
         "chai": "^4.3.4",
-        "ec0lint": "^0.0.25",
+        "ec0lint": "^0.0.28",
         "ec0lint-config-ec0lint": "^0.0.8",
         "eslint": "^8.11.0",
         "esmock": "^1.7.0",
