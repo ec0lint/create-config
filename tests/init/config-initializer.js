@@ -104,7 +104,6 @@ describe("configInitializer", () => {
         log.error.resetHistory();
         npmInstallStub.resetHistory();
         npmCheckStub.resetHistory();
-        npmFetchPeerDependenciesStub.resetHistory();
     });
 
     after(() => {
@@ -117,27 +116,19 @@ describe("configInitializer", () => {
 
             beforeEach(() => {
                 answers = {
-                    purpose: "style",
+                    purpose: "all",
                     source: "prompt",
-                    extendDefault: true,
-                    indent: 2,
-                    quotes: "single",
-                    linebreak: "unix",
-                    semi: true,
-                    moduleType: "esm",
-                    es6Globals: true,
-                    env: ["browser"],
-                    format: "JSON"
+                    format: "JSON",
+                    env: ["node"]
                 };
             });
 
             it("should create default config", () => {
                 const config = init.processAnswers(answers);
 
-                // assert.strictEqual(config.env.es2021, true);
-                // assert.strictEqual(config.parserOptions.ecmaVersion, "latest");
-                // assert.strictEqual(config.parserOptions.sourceType, "module");
-                assert.strictEqual(config.env.browser, true);
+                assert.strictEqual(config.env.es2021, true);
+                assert.strictEqual(config.parserOptions.ecmaVersion, "latest");
+                assert.strictEqual(config.env.node, true);
                 assert.strictEqual(config.extends, "ec0lint:recommended");
             });
 
@@ -156,17 +147,17 @@ describe("configInitializer", () => {
                 assert.strictEqual(config.extends, "ec0lint:recommended");
             });
 
-            it("should not use commonjs by default", () => {
+            it("should not use browser by default", () => {
                 const config = init.processAnswers(answers);
 
-                assert.isUndefined(config.env.commonjs);
+                assert.isUndefined(config.env.browser);
             });
 
-            it("should use commonjs when set", () => {
-                answers.moduleType = "commonjs";
+            it("should use browser when set", () => {
+                answers.env = ["browser"];
                 const config = init.processAnswers(answers);
 
-                assert.isTrue(config.env.commonjs);
+                assert.isTrue(config.env.browser);
             });
         });
     });

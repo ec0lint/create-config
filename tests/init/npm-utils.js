@@ -207,7 +207,7 @@ describe("npmUtils", () => {
 
             stubinstallSyncSaveDev("some-package");
 
-            assert(logErrorStub.calledOnce);
+            sinon.assert.calledOnce(logErrorStub);
 
             npmUtilsStub.restore();
         });

@@ -1,7 +1,7 @@
 {
     "name": "@ec0lint/create-config",
-    "version": "0.0.2",
-    "author": "Malwina Kubas <malwina.kubas@gmail.com>",
+    "version": "0.0.15",
+    "author": "Malwina Kubas @malwinq",
     "description": "Utility to create ec0lint config files.",
     "keywords": [
         "ast",
@@ -29,21 +29,16 @@
         "access": "public"
     },
     "scripts": {
-        "lint": "eslint .",
+        "lint": "ec0lint .",
         "test": "mocha \"tests/init/**/*.js\"",
-        "test:cov": "c8 npm test",
-        "generate-alpharelease": "eslint-generate-prerelease alpha",
-        "generate-betarelease": "eslint-generate-prerelease beta",
-        "generate-rcrelease": "eslint-generate-prerelease rc",
-        "generate-release": "eslint-generate-release",
-        "publish-release": "eslint-publish-release"
+        "test:cov": "c8 npm test"
     },
     "mocha": {
         "loader": "esmock",
         "ui": "bdd"
     },
     "dependencies": {
-        "@eslint/eslintrc": "^1.0.3",
+        "@ec0lint/ec0lintrc": "^0.0.13",
         "cross-spawn": "^7.0.2",
         "debug": "^4.0.1",
         "enquirer": "^2.3.5",
@@ -54,17 +49,9 @@
     "devDependencies": {
         "c8": "^7.10.0",
         "chai": "^4.3.4",
+        "ec0lint": "^0.0.28",
+        "ec0lint-config-ec0lint": "^0.0.8",
         "eslint": "^8.11.0",
-        "eslint-config-airbnb": "^19.0.4",
-        "eslint-config-eslint": "^7.0.0",
-        "eslint-config-google": "^0.14.0",
-        "eslint-plugin-import": "^2.25.4",
-        "eslint-plugin-jsdoc": "^37.0.3",
-        "eslint-plugin-jsx-a11y": "^6.5.1",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-react": "^7.29.4",
-        "eslint-plugin-react-hooks": "^4.3.0",
-        "eslint-release": "^3.2.0",
         "esmock": "^1.7.0",
         "espree": "^9.0.0",
         "fs-teardown": "^0.3.0",
@@ -79,7 +66,7 @@
         "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
     },
     "lint-staged": {
-        "*.js": "eslint --fix"
+        "*.js": "ec0lint"
     },
     "gitHooks": {
         "pre-commit": "lint-staged"
