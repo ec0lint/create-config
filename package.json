@@ -1,6 +1,6 @@
 {
     "name": "@ec0lint/create-config",
-    "version": "0.0.21",
+    "version": "1.0.0",
     "author": "Malwina Kubas @malwinq",
     "description": "Utility to create ec0lint config files.",
     "keywords": [
