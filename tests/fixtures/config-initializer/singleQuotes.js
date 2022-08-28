@@ -1,1 +1,1 @@
-var foo = 'singleQuotes';
+var foo = 'singleQuotes'; // eslint-disable-line

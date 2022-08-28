@@ -1,1 +1,1 @@
-var name = 'ESLint';
+var name = 'ESLint'; // eslint-disable-line
