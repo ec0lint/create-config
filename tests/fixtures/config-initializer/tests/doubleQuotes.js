@@ -1,1 +1,1 @@
-var foo = 'doubleQuotes';
+var foo = 'doubleQuotes'; // eslint-disable-line

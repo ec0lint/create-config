@@ -28,7 +28,7 @@
         "access": "public"
     },
     "scripts": {
-        "lint": "ec0lint .",
+        "lint": "eslint .",
         "test": "mocha \"tests/init/**/*.js\"",
         "test:cov": "c8 npm test"
     },
