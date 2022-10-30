@@ -1,3 +1,7 @@
+v2.0.0 - September 30, 2022
+
+* CO2 module and new rules
+
 v1.0.0 - June 6, 2022
 
 * First release - MVP - 4 rules with heavy libraries replacement
