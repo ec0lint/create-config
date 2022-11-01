@@ -119,6 +119,7 @@ describe("configInitializer", () => {
                     purpose: "all",
                     source: "prompt",
                     format: "JSON",
+                    framework: "none",
                     env: ["node"]
                 };
             });
@@ -158,6 +159,14 @@ describe("configInitializer", () => {
                 const config = init.processAnswers(answers);
 
                 assert.isTrue(config.env.browser);
+            });
+
+            it("should use react plugin when set", () => {
+                answers.framework = "react";
+                const config = init.processAnswers(answers);
+
+                assert.strictEqual(config.extends.length, 2);
+                assert.strictEqual(config.extends[1], "plugin:react/recommended");
             });
         });
     });
