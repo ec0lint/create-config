@@ -1,3 +1,6 @@
+v2.1.0 - January 29, 2023
+* add HTML plugin
+
 v2.0.0 - September 30, 2022
 
 * CO2 module and new rules

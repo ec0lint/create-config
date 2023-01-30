@@ -168,6 +168,14 @@ describe("configInitializer", () => {
                 assert.strictEqual(config.extends.length, 2);
                 assert.strictEqual(config.extends[1], "plugin:react/recommended");
             });
+
+            it("should use html plugin when set", () => {
+                answers.framework = "html";
+                const config = init.processAnswers(answers);
+
+                assert.strictEqual(config.extends.length, 2);
+                assert.strictEqual(config.extends[1], "plugin:html/recommended");
+            });
         });
     });
 
