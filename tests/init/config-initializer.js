@@ -14,11 +14,11 @@ import path from "path";
 import sinon from "sinon";
 import sh from "shelljs";
 import esmock from "esmock";
-import { fileURLToPath } from "url";
+import {fileURLToPath} from "url";
 import * as npmUtils from "../../lib/init/npm-utils.js";
 
 const originalDir = process.cwd();
-const { assert } = chai;
+const {assert} = chai;
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -173,8 +173,12 @@ describe("configInitializer", () => {
                 answers.framework = "html";
                 const config = init.processAnswers(answers);
 
-                assert.strictEqual(config.extends.length, 2);
-                assert.strictEqual(config.extends[1], "plugin:html/recommended");
+                assert.strictEqual(config.plugins.length, 1);
+                assert.strictEqual(config.plugins[0], "html");
+                assert.strictEqual(config.overrides.length, 1);
+                assert.strictEqual(config.overrides[0].files[0], "*.html");
+                assert.strictEqual(config.overrides[0].parser, "@html-eslint/parser");
+                assert.strictEqual(config.overrides[0].extends[0], "plugin:html/recommended");
             });
         });
     });
